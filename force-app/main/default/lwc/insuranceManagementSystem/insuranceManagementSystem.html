@@ -1,0 +1,415 @@
+<template>
+    <lightning-card>
+        <div slot="title">
+            <lightning-avatar size="large" src={insuranceImage} alternative-text="Insurance Logo" class="slds-m-right_small"></lightning-avatar>
+            <span class="slds-text-color_destructive slds-text-heading_large">Life and Motor Insurance</span>
+        </div>
+        <div slot="actions">
+            <lightning-button variant="base" label="Call Us" icon-name="utility:listen" icon-position="left" onclick={handleOnCallUs}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <lightning-badge label="(Available 24 x 7)"></lightning-badge>
+        </div>
+        <div class="tabContainer">
+            <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-space">
+                <div class="slds-col">
+                    <button class="slds-button tabButtons" onclick={homeTabOnClick}>Home</button>
+                </div>
+                <div class="slds-col">
+                    <button class="slds-button tabButtons" onclick={adminTabOnClick}>Admin</button>
+                </div>
+                <div class="slds-col">
+                    <button class="slds-button tabButtons" onclick={agentTabOnClick}>Agent</button>
+                </div>
+                <div class="slds-col">
+                    <button class="slds-button tabButtons" onclick={policyHolderTabOnClick}>Policy Holder</button>
+                </div>
+                <div class="slds-col">
+                    <button class="slds-button tabButtons" onclick={paymentsTabOnClick}>Payments</button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <template if:true={defaultBody}>
+                <div class="marquee">
+                    <p>
+                        <b>Welcome To Insurance Management System</b>
+                    </p>
+                </div>
+                <div class="homeImage">
+                    <div style="padding-top: 30px; padding-left:60px; width:700px">
+                        <div style="font-size: 30px;">
+                            <span style="font-weight: normal;">Your life & motor insurance is </span>
+                            now
+                            <br>
+                            on make easy
+                        </div><br/>
+                        <div>
+                            <p style="font-size: 18px;">
+                                Securing your financial future is now made easy. Insurance Management System is here to simplify financial planning for you and your family. Be it keeping track of your existing plans or getting knowledge of new plans, paying premiums or managing portfolio - meet all your insurance needs in one app. Now no need to spend time and efforts by heading to the branch or contacting your agent.
+                            </p>
+                        </div>
+                    </div>
+                    <div style="padding-top: 30px; padding-left:60px; width:700px">
+                       <!-- <b style="font-size: 20px;">Motor Insurance:</b><br/>
+                        <p style="font-size: 16px;">Motor insurance is an insurance policy designed for four-wheelers, two-wheelers, commercial trucks, and other road vechicles.
+                            It has been made mandatory for all vehicles such as cars, bikes, scooters, and trucks that are plying on the roads in india. Vehicle owners are required to 
+                            avail motor insurance even for commercial vehicles as well. Nowadays, you can get vehicle insurance online and pay the policy premium as well. 
+                        </p>-->
+                        <div style="position: absolute; left: 900px; top: 450px">
+                            <button style="font-size: 21px; color:white; background-color:#b02a30; width:180px" onclick={registerOnClick}>Register</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="footerrrr">
+                    <div class="slds-var-p-around_large">
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col">
+                                <div class="open-list">Product Links</div>
+                                <ul class="footer-list">
+                                    <li>Buy Online</li><br>
+                                    <li>Life Insurance</li><br>
+                                    <li>1 Crore Term Insurance</li><br>
+                                    <li>Unit Linked Insurance Plans (ULIPs)
+                                        <ul class="inner-footer">
+                                            <li>Pru Signature</li>
+                                            <li>Pru LifeTime Classic</li>
+                                            <li>Pru1 Wealth</li>
+                                        </ul>
+                                    </li><br>
+                                    <li>Guaranteed Return Plans
+                                        <ul class="inner-footer">
+                                            <li>Pru Guaranteed Income For</li>
+                                            <li>Tomorrow (Long-term) (New)</li>
+                                            <li>ICICI Pru Guaranteed Income For Tomorrow</li>
+                                            <li>ICICI Pru Assured Savings Insurance Plan</li>
+                                        </ul>
+                                    </li><br>
+                                    <li>Health Insurance Plans
+                                        <ul class="inner-footer">
+                                            <li>Pru Heart / Cancer Protect</li>
+                                        </ul>
+                                    </li><br>
+                                    <li>What is Term Insurance?</li><br>
+                                    <li>What is Health Insurance?</li><br>
+                                    <li>Compare Term Insurance</li><br>
+                                    <li>Whole Life Insurance</li>
+                                </ul>
+                            </div>
+                            <div class="slds-col">
+                                <div class="open-list">Customer Service</div>
+                                <ul class="footer-list">
+                                    <li>Premium Payment
+                                        <ul class="inner-footer">
+                                            <li>Pay Your First Premium</li>
+                                            <li>Pay Renewal Premium</li>
+                                        </ul>
+                                    </li><br>
+                                    <li>Download Statements
+                                        <ul class="inner-footer">
+                                            <li>e-Welcome kit/Policy Document</li>
+                                            <li>Tax/Premium Paid Certificate</li>
+                                            <li>Policy/Unit Statement</li>
+                                        </ul>
+                                    </li><br>
+                                    <li>Manage Your Funds
+                                        <ul class="inner-footer">
+                                            <li>Check Fund Value</li>
+                                            <li>Switch Funds</li>
+                                            <li>Top Up</li>
+                                        </ul>
+                                    </li><br>
+                                    <li>Update Profile Details
+                                        <ul class="inner-footer">
+                                            <li>Update Contact Details</li>
+                                            <li>Update PAN Details</li>
+                                            <li>Update Nominee Details</li>
+                                        </ul>
+                                    </li><br>
+                                    
+                                    <li>Tools And Calculators
+                                        <ul class="inner-footer">
+                                            <li>Term Insurance Premium Calculator</li>
+                                            <li>Income Tax Calculator</li>
+                                            <li>Power of Compounding Calculator</li>
+                                            <li>EMI Calculator</li>
+                                            <li>Motor Insurance Calculator</li>
+                                            <li>Life Insurance Calculator</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="slds-col">
+                                <div class="open-list">Quick Links</div>
+                                <ul class="footer-list">
+                                    <li>Public Disclosure</li><br>
+                                    <li>Download Centre</li><br>
+                                    <li>Goods and Services Tax Rates 2017</li><br>
+                                    <li>Cookie Policy</li><br>
+                                    <li>Disclaimer Policy</li><br>
+                                    <li>Privacy Policy</li><br>
+                                    <li>Terms and Conditions</li><br>
+                                    <li>Claims</li><br>
+                                    <li>Hospital Network</li><br>
+                                    <li>Tax Planning
+                                        <ul class="inner-footer">
+                                            <li>ULIPS as a tax saving investment</li>
+                                            <li>Income Tax Slabs & Rates</li>                                       
+                                            <li>How to Save Income Tax</li>
+                                            <li>Tax Saving Life Insurance Plans</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="slds-col">
+                                <div class="open-list">Social Media Links</div>
+                                <ul class="footer-list">
+                                    <li>Like Us on Facebook</li><br>
+                                    <li>Follow Us on Twitter</li><br>
+                                    <li>Follow Us on Instagram</li><br>
+                                    <li>Watch Our Videos</li><br>
+                                    <li>Connect on LinkedIn</li><br>
+                                    <li>Add on Google Plus</li>
+                                </ul>
+                            </div>
+                        </div><br/><br/>
+                        <div style="font-size: 10px;">
+                            <p>
+                                Insurance Management System Prudential Life Insurance Co. Ltd. All rights reserved. Registered with Insurance Regulatory & 
+                                Development Authority of India (IRDAI) as Life Insurance Company. Regn. No. 105. CIN: L66010MH2000PLC127837.
+                            </p><br/>
+                            <p>
+                                Reg. Off.: Life Insurance System PruLife Towers, 1089 Appasaheb Marathe Marg, Prabhadevi, Mumbai 400025. Tel.: 40391600. 
+                                Customer helpline number - 1860 266 7766. Timings – 10:00 A.M. to 7:00 P.M., Monday to Saturday 
+                                (except national holidays). Member of the Life Insurance Council. For more details on the risk factors, 
+                                term and conditions please read the product brochure carefully before concluding the sale.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <template if:true={registrationFrom}>
+                <div style="border:1px solid black; width: 600px; margin-top: 50px; margin-left:300px">
+                    <div class="slds-align_absolute-center">
+                        <b style="font-size: 20px;">Registration form</b>
+                    </div>
+                    <div class="slds-p-around_medium">
+                        <lightning-input name="name" type="text" label="Name" onchange={handleOnChange} required></lightning-input>
+                        <lightning-combobox name="gender" label="Gender" options={options} onchange={handleOnChange}></lightning-combobox>
+                        <lightning-input type="date" name="dob" label="Date Of Birth" onchange={handleOnChange}></lightning-input>
+                        <lightning-input type="tel" name="phone" label="Phone" onchange={handleOnChange} required></lightning-input>
+                        <lightning-input type="email" name="email" label="Email" onchange={handleOnChange} required></lightning-input>
+                        <lightning-input type="text" name="occupation" label="Occupation" onchange={handleOnChange}></lightning-input>
+                        <lightning-input type="currency" name="income" label="Income" onchange={handleOnChange}></lightning-input>
+                        <lightning-input type="text" name="address" label="Address" onchange={handleOnChange}></lightning-input><br/>
+                        <div class="slds-align_absolute-center">
+                            <lightning-button label="Cancel" variant="brand" onclick={registerCancel}></lightning-button>&nbsp;&nbsp;
+                            <lightning-button label="Next" variant="brand" onclick={handleOnNext}></lightning-button>
+                        </div>
+                    </div>
+                    <template if:true={showLoadingSpinner}>
+                        <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+                    </template>
+                </div>
+            </template>
+            <template if:true={registrationFromTwo}>
+                <div style="border:1px solid black; width: 600px; margin-top: 50px; margin-left:300px">
+                    <div class="slds-align_absolute-center">
+                        <b style="font-size: 20px;">Registration form</b>
+                    </div>
+                    <div class="slds-p-around_medium">
+                        <div>
+                            <lightning-combobox name="selectInsurance" required="true" label="Select Insurance" value={selectedValue} placeholder="Select any one insurance" options={insuranceOptions} onchange={handleSelectInsuranceOnChange}></lightning-combobox>
+                            <div if:true={ifTrue}>
+                                <lightning-record-edit-form object-api-name="Motor_Insurance__c" record-id={motorInsuranceRecordId} onsuccess={miSaveOnsuccesss}>
+                                    <lightning-input-field variant="label-inline" field-name="Motor_Type__c"></lightning-input-field>
+                                    <lightning-input-field variant="label-inline" field-name="Motor_Color__c"></lightning-input-field>
+                                    <lightning-input-field variant="label-inline" field-name="Manufactured_Year__c"></lightning-input-field>
+                                    <lightning-input-field variant="label-inline" field-name="Premium_Amount__c"></lightning-input-field>
+                                    <lightning-input-field variant="label-inline" field-name="No_of_Terms__c"></lightning-input-field>
+                                    <lightning-input-field variant="label-inline" field-name="Premium_Type__c"></lightning-input-field>
+                                    <lightning-input-field variant="label-inline" field-name="Premium_Start_Date__c"></lightning-input-field>
+                                    <lightning-input-field variant="label-inline" field-name="Premium_End_Date__c"></lightning-input-field>
+                                    <div class="buttons">
+                                        <lightning-button label="Save" onclick={miSaveRecordOnClick}></lightning-button>&nbsp; &nbsp;
+                                        <button class="slds-button slds-button_neutral" onclick={miHideModalBox}>Cancel</button>
+                                    </div>
+                                </lightning-record-edit-form>
+                            </div>
+                            <div if:false={ifTrue}>
+                                <lightning-record-edit-form object-api-name="Life_Insurance__c" record-id={lifeInsuranceRecordId} onsuccess={liSaveOnsuccesss}>
+                                    <lightning-input-field variant="label-inline" field-name="Policy_Holder_Name__c"></lightning-input-field>
+                                    <lightning-input-field variant="label-inline" field-name="Agent_ID__c"></lightning-input-field>
+                                    <lightning-input-field variant="label-inline" field-name="Premium_Amount__c"></lightning-input-field>
+                                    <lightning-input-field variant="label-inline" field-name="No_of_Terms__c"></lightning-input-field>
+                                    <lightning-input-field variant="label-inline" field-name="Premium_Type__c"></lightning-input-field>
+                                    <lightning-input-field variant="label-inline" field-name="Premium_Start_Date__c"></lightning-input-field>
+                                    <lightning-input-field variant="label-inline" field-name="Premium_End_Date__c"></lightning-input-field>
+                                    <div class="buttons">
+                                        <lightning-button label="Save" onclick={liSaveRecordOnClick}></lightning-button>&nbsp; &nbsp;
+                                        <button class="slds-button slds-button_neutral" onclick={liHideModalBox}>Cancel</button>
+                                    </div>
+                                </lightning-record-edit-form>
+                            </div>
+                        </div>
+                        <div class="slds-align_absolute-center">
+                            <lightning-button label="Previous" variant="brand" onclick={handleOnPrevious}></lightning-button>&nbsp;&nbsp;
+                            <lightning-button label="Next" variant="brand" onclick={handleOnSecondNext}></lightning-button>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+        <div if:true={AdAgPhPy}>
+        <div class="bodyContainer">
+            <template if:true={adminDefaultPage}>
+                <div if:true={loginPage}>
+                    <div style="width: 450px; margin-left: 400px;">
+                        <div style="padding: 50px;">
+                            <b style="font-size: 20px;">Log In</b><br/>
+                            <lightning-input required="true" type="text" label="Username" onchange={handleEmailChange}></lightning-input><br/>
+                            <lightning-input required="true" type="password" label="Password" onchange={handlePasswordChange}></lightning-input>
+                            <div if:true={wrongDetails}>
+                                <b style="font-size: 18;">**The password or username that you are've entered is incorrect.</b>
+                            </div><br/><br/>
+                            <div class="slds-align_absolute-center">
+                                <template if:true={enableLogin}>
+                                    <lightning-button label="LogIn" onclick={handleOnlogin}></lightning-button>
+                                </template>
+                                <template if:false={enableLogin}>
+                                    <lightning-button label="LogIn" onclick={handleOnlogin} disabled></lightning-button>
+                                </template>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                <div if:false={loginPage}>
+                    <c-insurance-component onmylogout={handleOnLogOut}></c-insurance-component>
+                </div>
+                <template if:true={showLoadingSpinner}>
+                    <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+                </template>
+            </template>
+            <template if:true={agentDefaultPage}>
+                <div style="position: relative; left: 150px; top:40px; width: 1000px;">
+                    <lightning-layout horizontal-align="space">
+                        <lightning-layout-item size="3" flexibility="auto" padding="around-small">
+                           <b class="slds-text-heading_medium">Enter Agent ID:</b>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="4" flexibility="auto" padding="around-small">
+                            <lightning-input variant="label-hidden" onchange={agentIdOnchange}></lightning-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="2" flexibility="auto" padding="around-small">
+                            <button style="font-size: 20px; color:brown" onclick={agentSubmitOnClick}>Submit</button>
+                        </lightning-layout-item>
+                    </lightning-layout><br/><br/>
+                </div><br/>
+                <div class="slds-align_absolute-center slds-text-heading_large">
+                    <template if:true={agentHelpText}>
+                        <b>Oopsss... Please Enter valid ID.</b>
+                    </template>
+                    <template if:true={agentErrorText}>
+                        <b>Oopsss... Please Enter your ID.</b>
+                    </template>
+                </div>
+                <div>
+                    <template if:true={agentRecord}>
+                        <lightning-layout horizontal-align="space">
+                            <lightning-layout-item size="5" flexibility="auto" padding="around-small">
+                                <lightning-card title="Personal Details" icon-name="standard:account">
+                                    <div class="slds-p-around_medium">
+                                        <template for:each={agentRecord} for:item="agRecord">
+                                            <div key={agRecord.Id}>
+                                                <lightning-record-view-form record-id={agRecord.Id} object-api-name="Agent__c">
+                                                    <lightning-output-field field-name="Name" variant="label-inline"></lightning-output-field>
+                                                    <lightning-output-field field-name="Agent_ID__c" variant="label-inline"></lightning-output-field>
+                                                    <lightning-output-field field-name="DOB__c" variant="label-inline"></lightning-output-field>
+                                                    <lightning-output-field field-name="Gender__c" variant="label-inline"></lightning-output-field>
+                                                    <lightning-output-field field-name="Phone__c" variant="label-inline"></lightning-output-field>
+                                                    <lightning-output-field field-name="Email__c" variant="label-inline"></lightning-output-field>
+                                                    <lightning-output-field field-name="Registration_Date__c" variant="label-inline"></lightning-output-field>
+                                                    <lightning-output-field field-name="Address__c" variant="label-inline"></lightning-output-field>
+                                                </lightning-record-view-form>
+                                            </div> 
+                                        </template>                       
+                                    </div>
+                                </lightning-card>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="7" flexibility="auto" padding="around-small">
+                                <lightning-card title="Related Policy Holders Details">
+                                    <div class="slds-p-around_medium">
+                                        <lightning-datatable key-field="Id" data={agentRelatedRecords} columns={policyHolderColumns} hide-checkbox-column="true"></lightning-datatable>
+                                    </div>
+                                </lightning-card>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </template>
+                </div>
+            </template>
+            <template if:true={poicyHolderDefaultPage}>
+                <div class="innerBodyContainerPH">
+                    <div class="slds-col slds-size_6-of-12">
+                        <lightning-layout>
+                            <lightning-layout-item size="6">
+                               <b class="slds-text-heading_medium">Enter Policy Holder ID:</b>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="6">
+                                <lightning-input variant="label-hidden" onchange={policyHolderIdOnchange}></lightning-input>
+                            </lightning-layout-item>
+                        </lightning-layout><br/><br/>
+                        <div class="innerBodyContainerPHv2">
+                            <button style="font-size: 21px; color:brown; width:180px" onclick={PolicyHoldersubmitOnClick}>Submit</button>
+                        </div> 
+                    </div><br/><br/><br/>
+                    <div class="slds-col slds-size_8-of-12">
+                        <template if:true={showDataTable}>
+                            <lightning-datatable key-field="Id" data={insuranceRecords} columns={columns} hide-checkbox-column="true"></lightning-datatable>
+                        </template>
+                        <template if:true={helpText}>
+                            <div class="slds-align_absolute-center slds-text-heading_large">
+                                <b>Oopsss... Please Enter valid ID.</b>
+                            </div>
+                        </template>
+                        <template if:true={phErrorText}>
+                            <div class="slds-align_absolute-center slds-text-heading_large">
+                                <b>Oopsss... Please Enter your ID.</b>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </template>
+            <template if:true={paymentsDefaultPage}>
+                <template if:true={PaymentRecordEditForm}>
+                    <div style="width:500px; position:relative; top:50px; left:350px; border: 2px solid black">
+                        <div>
+
+                        </div>
+                        <div>
+                            <lightning-card title="Payments" icon-name="utility:payment_gateway">
+                                <div class="slds-p-around_medium">
+                                    <lightning-record-edit-form object-api-name="Payment__c" onsuccess={handleSuccess}>
+                                        <lightning-messages></lightning-messages>
+                                        <lightning-input-field field-name="Life_Insurance__c"></lightning-input-field>
+                                        <lightning-input-field field-name="Motor_Insurance__c"></lightning-input-field>
+                                        <lightning-input-field field-name="Premium_Amount__c"></lightning-input-field>
+                                        <lightning-input-field field-name="Paid_Date__c"></lightning-input-field><br/>
+                                        <div class="slds-align_absolute-center">
+                                            <lightning-button name="submit" variant="destructive-text" label="Submit" onclick={PaymentSubmitOnclick}></lightning-button>&nbsp;&nbsp;&nbsp;
+                                            <lightning-button variant="destructive-text" label="cancel" onclick={paymentCancelOnClick}></lightning-button>
+                                        </div>
+                                    </lightning-record-edit-form>
+                                </div>
+                            </lightning-card>
+                        </div>
+                    </div>
+                </template>    
+                <template if:true={successMessage}>
+                    <div class="slds-text-heading_large">
+                        <div style="position:relative; top:300px; left:350px; width: 1000px;">
+                            <b>Payment was successfully completed.</b>
+                        </div>
+                    </div>
+                </template>
+            </template>
+        </div>    
+        </div>
+    </lightning-card>
+</template>

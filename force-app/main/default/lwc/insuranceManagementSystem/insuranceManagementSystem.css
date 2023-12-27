@@ -1,0 +1,86 @@
+.tabButtons{
+    --sds-c-button-text-color: white;
+    --sds-c-button-text-color-hover: white;
+    height: 50px;
+    text-align: center;
+    font-size: 30px;    
+}
+.tabButtons:hover {
+    background-color: orangered;
+  }
+
+.tabContainer{
+    height: 50px;
+    background: #b02a30;
+}
+.bodyContainer{
+    height: 600px;
+    background-image: linear-gradient(to right, #FF9900, #FF3600);
+    
+    
+}
+.innerBodyContainerPH{
+    position: relative;
+    left: 200px;
+    top: 80px;
+    size: 50px;
+    width: 1000px;
+}
+.innerBodyContainerPHv2{
+    position: relative;
+    left: 160px;
+}
+.homeImage{
+    background-image: url("https://www.bajajallianz.com/content/dam/bagic/index/new-banner-motor.jpg");
+    width: 100%;
+    height: 350px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.marquee{
+    width: 100%;
+    line-height: 50px;
+    color: #0000FF;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: white;
+}
+ 
+.marquee p {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 20s linear infinite;
+    font-size:30px;
+}
+ 
+@keyframes marquee {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
+.open-list{
+    font-weight: 800;
+    margin-bottom: 30px;
+    margin-top: 0;
+    text-transform: capitalize;
+    font-size: 20px;
+}
+.footer-list{
+    display: inline-block;
+    font-weight: 600;
+    padding-left: 0;
+    width: 100%;
+}
+.inner-footer{
+    padding-left : 10px; 
+}
+.footerrrr{
+    background-color: #97291e;
+    color: #fff;
+}
+.img-svr1 {
+    width: 55px;
+    height: 53px;
+    background-repeat: no-repeat;
+    display: inline-block;
+}

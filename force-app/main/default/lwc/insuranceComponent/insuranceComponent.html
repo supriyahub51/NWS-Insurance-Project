@@ -1,0 +1,307 @@
+<template>
+    <template if:true={homePage}>
+        <div style="text-align: right;">
+            <lightning-button-menu onselect={handleOnselect} alternative-text="Show menu" variant="border-filled" menu-alignment="auto">
+                <lightning-menu-item value="logOut" label="Log Out"></lightning-menu-item>
+            </lightning-button-menu>
+        </div>
+        <div style="position: relative; width: 900px; height: 250px; top: 50px; left:250px">
+            <lightning-layout horizontal-align="space">
+                <lightning-layout-item flexibility="auto" size="6" padding="around-small">                
+                    <button style="font-size: 21px; color:brown; width:180px" name="agent" onclick={handleOnClick}>Agent</button>                
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto" size="6" padding="around-small">                   
+                    <button style="font-size: 21px; color:brown; width:180px" name="policy" onclick={handleOnClick}>Policy Holder</button>                
+                </lightning-layout-item>
+            </lightning-layout><br/><br/><br/><br/>
+            <lightning-layout horizontal-align="space">
+                <lightning-layout-item flexibility="auto" size="6" padding="around-small">                    
+                    <button style="font-size: 21px; color:brown; width:180px" name="life" onclick={handleOnClick}>Life Insurance</button>                
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto" size="6" padding="around-small">                    
+                    <button style="font-size: 21px; color:brown; width:180px" name="motar" onclick={handleOnClick}>Motor Insurance</button>                
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </template>
+
+    <!--Agent Insurance page-->
+    <template if:true={agentPage}>
+        <div>
+            <lightning-button-icon variant="border-filled"  icon-name="utility:back"  alternative-text="back" title="back" onclick={firstBackOnClick}></lightning-button-icon>
+        </div>
+        <div style="position: relative; text-align: center; top: 50px">
+            <lightning-layout horizontal-align="space">
+                <lightning-layout-item flexibility="auto" size="12" padding="around-small">
+                    <button style="font-size: 16px; color:brown; width:180px" onclick={addAgentOnClick}>Add Agent</button>
+                </lightning-layout-item>
+            </lightning-layout>
+            <br/><br/><br/>
+            <lightning-layout horizontal-align="space">
+                <lightning-layout-item flexibility="auto" size="12" padding="around-small"> 
+                    <button style="font-size: 16px; color:brown; width:180px" onclick={viewAgentOnClick}>View Agent</button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>   
+    </template>
+    <!-- MODAL POPUP -->
+    <template if:true={agentShowModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                 <!-- modal header start -->
+                 <header class="slds-modal__header">
+                     <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideModalBox}>
+                         <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small"></lightning-icon>
+                             <span class="slds-assistive-text">Close</span>
+                     </button>
+                     <h2 class="slds-text-heading_medium slds-hyphenate">Agent</h2>
+                 </header>
+                  <!-- modal body start -->
+                 <div class="slds-modal__content slds-p-around_medium">
+                     <lightning-record-edit-form object-api-name="Agent__c" record-id={agentRecordId} onsuccess={agentSaveOnsuccesss}>
+                         <lightning-input-field variant="label-inline" field-name="Name"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="DOB__c"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="Gender__c"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="Phone__c"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="Email__c"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="Address__c"></lightning-input-field>
+                         <div class="buttons">
+                             <lightning-button label="Save" name="agentsave" onclick={agentSaveRecordOnClick}></lightning-button>&nbsp; &nbsp;
+                             <button class="slds-button slds-button_neutral" onclick={hideModalBox} name="agentCancle">Cancel</button>
+                         </div>
+                     </lightning-record-edit-form>
+                 </div>
+                 <!-- modal footer start-->
+                 <footer class="slds-modal__footer">
+                     
+                 </footer>
+             </div>
+         </section>
+         <div class="slds-backdrop slds-backdrop_open"></div>
+     </template>
+    <template if:true={listOfAgents}>
+        <div>
+            <lightning-button-icon variant="border-filled"  icon-name="utility:back"  alternative-text="back" title="back" onclick={hideListOfAgents}></lightning-button-icon>
+        </div>
+        <div style="position: relative; text-align: center; top: 50px; width: 1000px; left: 100px">
+            <template if:true={agentData}>
+                <lightning-datatable key-field="Id" data={agentData} columns={columns} onrowaction={AgentRowAction} hide-checkbox-column="true"></lightning-datatable>
+            </template>
+            <div if:true={showLoadingSpinner}>
+                <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+            </div>   
+        </div>  
+    </template>   
+    
+    <!--Policy Insurance page-->
+    <template if:true={policyHolderPage}>
+        <div>
+            <lightning-button-icon variant="border-filled" icon-name="utility:back"  alternative-text="back" title="back" onclick={firstBackOnClick}></lightning-button-icon>
+        </div>
+        <div style="position: relative; text-align: center; top: 50px">
+            <lightning-layout horizontal-align="space">
+                <lightning-layout-item flexibility="auto" size="12" padding="around-small">
+                    <button style="font-size: 16px; color:brown; width:180px" onclick={addPHOnClick}>Add PolicyHolder</button>
+                </lightning-layout-item>
+            </lightning-layout>
+            <br/><br/><br/>
+            <lightning-layout horizontal-align="space">
+                <lightning-layout-item flexibility="auto" size="12" padding="around-small"> 
+                    <button style="font-size: 16px; color:brown; width:180px" onclick={viewPHOnClick}>View PoicyHolder</button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </template>
+    <!-- show modal popup -->
+    <template if:true={policyHolderShowModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                 <!-- modal header start -->
+                 <header class="slds-modal__header">
+                     <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={PhHideModalBox}>
+                         <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small"></lightning-icon>
+                             <span class="slds-assistive-text">Close</span>
+                     </button>
+                     <h2 class="slds-text-heading_medium slds-hyphenate">Policy Holder</h2>
+                 </header>
+                  <!-- modal body start -->
+                 <div class="slds-modal__content slds-p-around_medium">
+                     <lightning-record-edit-form object-api-name="Policy_Holder__c" record-id={policyHolderRecordId} onsuccess={phSaveOnsuccesss}>
+                        <lightning-input-field variant="label-inline" field-name="Name"></lightning-input-field>
+                        <lightning-input-field variant="label-inline" field-name="Date_Of_Birth__c"></lightning-input-field>
+                        <lightning-input-field variant="label-inline" field-name="Agent_Name__c"></lightning-input-field>
+                        <lightning-input-field variant="label-inline" field-name="Gender__c"></lightning-input-field>
+                        <lightning-input-field variant="label-inline" field-name="Phone__c"></lightning-input-field>
+                        <lightning-input-field variant="label-inline" field-name="Email__c"></lightning-input-field>
+                        <lightning-input-field variant="label-inline" field-name="Occupation__c"></lightning-input-field>
+                        <lightning-input-field variant="label-inline" field-name="Income__c"></lightning-input-field>
+                        <lightning-input-field variant="label-inline" field-name="Address__c"></lightning-input-field>
+                        <div class="buttons">
+                            <lightning-button label="Save" name="agentsave" onclick={phSaveRecordOnClick}></lightning-button>&nbsp; &nbsp;
+                            <button class="slds-button slds-button_neutral" onclick={PhHideModalBox} name="agentCancle">Cancel</button>
+                        </div>
+                     </lightning-record-edit-form>
+                 </div>
+                 <!-- modal footer start-->
+                 <footer class="slds-modal__footer">
+                     
+                 </footer>
+             </div>
+         </section>
+         <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <template if:true={listOfPolicyHolders}>
+        <div>
+            <lightning-button-icon variant="border-filled" icon-name="utility:back"  alternative-text="back" title="back" onclick={hideListOfPolicyHolders}></lightning-button-icon>
+        </div>
+        <div style="position: relative; text-align: center; top: 50px; width: 1000px; left: 100px">
+            <template if:true={policyHolderData}>
+                <lightning-datatable key-field="Id" data={policyHolderData} columns={policyHoldercolumns} onrowaction={policyHolderRowAction} hide-checkbox-column="true"></lightning-datatable>
+            </template>
+            <template if:true={showLoadingSpinner}>
+                <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+            </template>
+        </div>  
+    </template>
+
+    <!--Life Insurance page-->
+    <template if:true={lifeInsuPage}>
+        <div>
+            <lightning-button-icon variant="border-filled" icon-name="utility:back"  alternative-text="back" title="back" onclick={firstBackOnClick}></lightning-button-icon>
+        </div>
+        <div style="position: relative; text-align: center; top: 50px">
+            <lightning-layout horizontal-align="space">
+                <lightning-layout-item flexibility="auto" size="12" padding="around-small">
+                    <button style="font-size: 16px; color:brown; width:180px" onclick={addLIOnClick}>Add LifeInsrance</button>
+                </lightning-layout-item>
+            </lightning-layout>
+            <br/><br/><br/>
+            <lightning-layout horizontal-align="space">
+                <lightning-layout-item flexibility="auto" size="12" padding="around-small"> 
+                    <button style="font-size: 16px; color:brown; width:180px" onclick={viewLiOnClick}>View LifeInsurance</button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </template>
+    <!-- MODAL POPUP -->
+    <template if:true={lifeInsuranceShowModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                 <!-- modal header start -->
+                 <header class="slds-modal__header">
+                     <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={liHideModalBox}>
+                         <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small"></lightning-icon>
+                             <span class="slds-assistive-text">Close</span>
+                     </button>
+                     <h2 class="slds-text-heading_medium slds-hyphenate">Life Insurance</h2>
+                 </header>
+                  <!-- modal body start -->
+                 <div class="slds-modal__content slds-p-around_medium">
+                     <lightning-record-edit-form object-api-name="Life_Insurance__c" record-id={lifeInsuranceRecordId} onsuccess={liSaveOnsuccesss}>
+                         <lightning-input-field variant="label-inline" field-name="Policy_Holder_Name__c"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="Agent_ID__c"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="Premium_Amount__c"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="No_of_Terms__c"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="Premium_Type__c"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="Premium_Start_Date__c"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="Premium_End_Date__c"></lightning-input-field>
+                         <div class="buttons">
+                             <lightning-button label="Save" onclick={liSaveRecordOnClick}></lightning-button>&nbsp; &nbsp;
+                             <button class="slds-button slds-button_neutral" onclick={liHideModalBox}>Cancel</button>
+                         </div>
+                     </lightning-record-edit-form>
+                 </div>
+                 <!-- modal footer start-->
+                 <footer class="slds-modal__footer">
+                     
+                 </footer>
+             </div>
+         </section>
+         <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <template if:true={listOfLifeInsurances}>
+        <div>
+            <lightning-button-icon variant="border-filled" icon-name="utility:back"  alternative-text="back" title="back" onclick={hideListOfLifeInsurances}></lightning-button-icon>
+        </div>
+        <div style="position: relative; text-align: center; top: 50px; width: 1000px; left: 100px">
+            <template if:true={lifeInsuranceData}>
+                <lightning-datatable key-field="Id" data={lifeInsuranceData} onrowaction={lifeInsuranceRowAction} columns={lifeInsurancecolumns} hide-checkbox-column="true"></lightning-datatable>
+            </template>
+            <template if:true={showLoadingSpinner}>
+                <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+            </template> 
+        </div>  
+    </template>
+
+    <!--Motor Insurance page-->
+    <template if:true={motarInsuPage}>
+        <div>
+            <lightning-button-icon variant="border-filled" icon-name="utility:back"  alternative-text="back" title="back" onclick={firstBackOnClick}></lightning-button-icon>
+        </div>
+        <div style="position: relative; text-align: center; top: 50px">
+            <lightning-layout horizontal-align="space">
+                <lightning-layout-item flexibility="auto" size="12" padding="around-small">
+                    <button style="font-size: 16px; color:brown; width:180px" onclick={addMIOnClick}>Add MotorInsurance</button>
+                </lightning-layout-item>
+            </lightning-layout>
+            <br/><br/><br/>
+            <lightning-layout horizontal-align="space">
+                <lightning-layout-item flexibility="auto" size="12" padding="around-small"> 
+                    <button style="font-size: 16px; color:brown; width:180px" onclick={viewMIOnClick}>View MotorInsurace</button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </template>
+    <!-- MODAL POPUP -->
+    <template if:true={motorInsuranceShowModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                 <!-- modal header start -->
+                 <header class="slds-modal__header">
+                     <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={miHideModalBox}>
+                         <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small"></lightning-icon>
+                             <span class="slds-assistive-text">Close</span>
+                     </button>
+                     <h2 class="slds-text-heading_medium slds-hyphenate">Motor Insurance</h2>
+                 </header>
+                  <!-- modal body start -->
+                 <div class="slds-modal__content slds-p-around_medium">
+                     <lightning-record-edit-form object-api-name="Motor_Insurance__c" record-id={motorInsuranceRecordId} onsuccess={miSaveOnsuccesss}>
+                         <lightning-input-field variant="label-inline" field-name="Policy_Holder_Name__c"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="Agent_Name__c"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="Motor_Type__c"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="Motor_Color__c"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="Manufactured_Year__c"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="Premium_Amount__c"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="No_of_Terms__c"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="Premium_Type__c"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="Premium_Start_Date__c"></lightning-input-field>
+                         <lightning-input-field variant="label-inline" field-name="Premium_End_Date__c"></lightning-input-field>
+                         <div class="buttons">
+                             <lightning-button label="Save" onclick={miSaveRecordOnClick}></lightning-button>&nbsp; &nbsp;
+                             <button class="slds-button slds-button_neutral" onclick={miHideModalBox}>Cancel</button>
+                         </div>
+                     </lightning-record-edit-form>
+                 </div>
+                 <!-- modal footer start-->
+                 <footer class="slds-modal__footer">
+                     
+                 </footer>
+             </div>
+         </section>
+         <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <template if:true={listOfMotorInsurance}>
+        <div>
+            <lightning-button-icon variant="border-filled" icon-name="utility:back"  alternative-text="back" title="back" onclick={hideListOfMotorInsurances}></lightning-button-icon>
+        </div>
+        <div style="position: relative; text-align: center; top: 50px; width: 1000px; left: 100px">
+            <template if:true={motorInsuranceData}>
+                <lightning-datatable key-field="Id" data={motorInsuranceData} onrowaction={motorInsuranceRowAction} columns={motorInsuranceColumns} hide-checkbox-column="true"></lightning-datatable>
+            </template>
+            <div if:true={showLoadingSpinner}>
+                <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+            </div> 
+        </div>  
+    </template>
+</template>
